@@ -3,18 +3,17 @@
 #include <string>
 #include "libretro.h"
 
-namespace Libretro {
+namespace Libretro
+{
+	bool EnvCb(unsigned cmd, void* data);
 
-bool EnvCb(unsigned cmd, void *data);
+	void LogStart();
+	bool LogEnabled();
+	void LogStop();
+	void Log(const char* fmt, ...);
 
-void LogStart();
-bool LogEnabled();
-void LogStop();
-void Log(const char *fmt, ...);
+	std::string GetSaveDir();
+	std::string GetSystemDir();
 
-std::string GetSaveDir();
-std::string GetSystemDir();
-
-bool DisplayMessage(const char* sg);
-
+	bool DisplayMessage(const char* sg);
 } // namespace Libretro
