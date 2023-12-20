@@ -6,7 +6,6 @@ add_library(CemuComponents
   FileCache/FileCache.cpp
   FileCache/FileCache.h
   Logging/CemuDebugLogging.h
-  Logging/CemuLogging.cpp
   Logging/CemuLogging.h
   napi/napi_act.cpp
   napi/napi_ec.cpp
@@ -31,6 +30,10 @@ add_library(CemuComponents
   Tools/DownloadManager/DownloadManager.cpp
   Tools/DownloadManager/DownloadManager.h
 )
+
+if (NOT LIBRETRO)
+  add_source_files(CemuComponents PUBLIC Logging/CemuLogging.cpp)
+endif()
 
 set_property(TARGET CemuComponents PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 

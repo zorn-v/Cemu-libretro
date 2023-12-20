@@ -51,14 +51,11 @@ add_subdirectory(imgui)
 add_subdirectory(resource)
 add_subdirectory(asm)
 
+if(NOT LIBRETRO)
 add_executable(CemuBin
 	main.cpp
 	mainLLE.cpp
 )
-
-if(LIBRETRO)
-	add_subdirectory(libretro)
-endif()
 
 if(WIN32)
 	target_sources(CemuBin PRIVATE
@@ -137,4 +134,9 @@ endif()
 
 if (ENABLE_WXWIDGETS)
 	target_link_libraries(CemuBin PRIVATE wx::base wx::core)
+endif()
+
+
+else()
+	add_subdirectory(libretro)
 endif()

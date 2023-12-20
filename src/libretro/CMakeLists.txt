@@ -1,5 +1,8 @@
 add_library(cemu_libretro SHARED
-    libretro.cpp
+    Environment.cpp
+    Environment.h
+    Logging.cpp
+    Main.cpp
 )
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}")
@@ -18,3 +21,7 @@ if(GIT_FOUND)
 endif()
 
 include_directories(..)
+
+#target_sources(CemuComponents PUBLIC Logging.cpp)
+target_link_libraries(CemuComponents PRIVATE cemu_libretro)
+target_link_libraries(cemu_libretro PRIVATE Boost::headers)

@@ -9,7 +9,8 @@
 #if defined(_WIN32) && !defined(_XBOX)
 #include <windows.h>
 #endif
-#include "libretro.h"
+
+#include "Environment.h"
 
 #include "Common/version.h"
 
@@ -18,8 +19,6 @@
 #define VIDEO_PIXELS VIDEO_WIDTH * VIDEO_HEIGHT
 
 static uint8_t *frame_buf;
-static struct retro_log_callback logging;
-static retro_log_printf_t log_cb;
 static bool use_audio_cb;
 static float last_aspect;
 static float last_sample_rate;
@@ -36,23 +35,22 @@ static void fallback_log(enum retro_log_level level, const char *fmt, ...)
 }
 
 
-static retro_environment_t environ_cb;
-
 void retro_init(void)
 {
+   Libretro::LogStart();
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * sizeof(uint32_t));
    const char *dir = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
+   if (Libretro::EnvCb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
    {
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
-
 }
 
 void retro_deinit(void)
 {
    free(frame_buf);
    frame_buf = NULL;
+   Libretro::LogStop();
 }
 
 unsigned retro_api_version(void)
@@ -62,7 +60,7 @@ unsigned retro_api_version(void)
 
 void retro_set_controller_port_device(unsigned port, unsigned device)
 {
-   log_cb(RETRO_LOG_INFO, "Plugging device %u into port %u.\n", device, port);
+   //log_cb(RETRO_LOG_INFO, "Plugging device %u into port %u.\n", device, port);
 }
 
 void retro_get_system_info(struct retro_system_info *info)
@@ -94,27 +92,6 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
 
    last_aspect                 = aspect;
    last_sample_rate            = sampling_rate;
-}
-
-void retro_set_environment(retro_environment_t cb)
-{
-   environ_cb = cb;
-
-   if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &logging))
-      log_cb = logging.log;
-   else
-      log_cb = fallback_log;
-
-   static const struct retro_controller_description controllers[] = {
-      { "Wii U GamePad", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_JOYPAD, 0) },
-   };
-
-   static const struct retro_controller_info ports[] = {
-      { controllers, 1 },
-      { NULL, 0 },
-   };
-
-   cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
 }
 
 void retro_set_audio_sample(retro_audio_sample_t cb)
@@ -183,7 +160,7 @@ void retro_run(void)
 
 
    bool updated = false;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
+   if (Libretro::EnvCb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
       check_variables();
 }
 
@@ -197,18 +174,18 @@ bool retro_load_game(const struct retro_game_info *info)
       { 0 },
    };
 
-   environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
+   Libretro::EnvCb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
 
    enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
-   if (!environ_cb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt))
+   if (!Libretro::EnvCb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt))
    {
-      log_cb(RETRO_LOG_INFO, "XRGB8888 is not supported.\n");
+      //log_cb(RETRO_LOG_INFO, "XRGB8888 is not supported.\n");
       return false;
    }
 
    snprintf(retro_game_path, sizeof(retro_game_path), "%s", info->path);
    struct retro_audio_callback audio_cb = { audio_callback, audio_set_state };
-   use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
+   use_audio_cb = Libretro::EnvCb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
    check_variables();
 
