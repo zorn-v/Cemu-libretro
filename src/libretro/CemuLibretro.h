@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Cafe/CafeSystem.h"
+
 namespace Libretro {
 namespace Cemu {
 

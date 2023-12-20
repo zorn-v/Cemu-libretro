@@ -1,7 +1,8 @@
 #include "Common/precompiled.h"
+#include "CemuLibretro.h"
 #include "Environment.h"
-#include "Cafe/CafeSystem.h"
 #include "Cafe/TitleList/TitleList.h"
+#include "util/crypto/aes128.h"
 
 
 namespace Libretro {
@@ -10,27 +11,28 @@ namespace Cemu {
 // check MainWindow::FileLoad
 bool GameLoad(const fs::path launchPath)
 {
-    fprintf(stderr, "GameLoad START\n");
+    // crypto init
+    AES128_init();
+	// init PPC timer
+	// call this as early as possible because it measures frequency of RDTSC using an asynchronous thread over 3 seconds
+	PPCTimer_init();
+
+    // init Cafe system
+	CafeSystem::Initialize();
+
     TitleInfo launchTitle{ launchPath };
-    fprintf(stderr, "launchTitle.IsValid ?\n");
-    Libretro::Log("GameLoad -1\n");
 	if (launchTitle.IsValid())
 	{
-        fprintf(stderr, "launchTitle.IsValid\n");
-        Libretro::Log("GameLoad 0\n");
 		// the title might not be in the TitleList, so we add it as a temporary entry
 		CafeTitleList::AddTitleFromPath(launchPath);
 		// title is valid, launch from TitleId
 		TitleId baseTitleId;
-        Libretro::Log("GameLoad 1\n");
 		if (!CafeTitleList::FindBaseTitleId(launchTitle.GetAppTitleId(), baseTitleId))
 		{
 			Libretro::DisplayMessage("Unable to launch game because the base files were not found.");
 			return false;
 		}
-        Libretro::Log("GameLoad 2\n");
 		CafeSystem::STATUS_CODE r = CafeSystem::PrepareForegroundTitle(baseTitleId);
-        Libretro::Log("GameLoad 3\n");
 		if (r == CafeSystem::STATUS_CODE::INVALID_RPX)
 		{
 			cemu_assert_debug(false);
