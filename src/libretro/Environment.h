@@ -15,4 +15,6 @@ void Log(const char *fmt, ...);
 std::string GetSaveDir();
 std::string GetSystemDir();
 
+bool DisplayMessage(const char* sg);
+
 } // namespace Libretro

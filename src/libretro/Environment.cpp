@@ -66,6 +66,14 @@ std::string GetSystemDir()
     return GetEnvStr(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY);
 }
 
+bool DisplayMessage(const char* sg)
+{
+    retro_message msg;
+    msg.msg = sg;
+    msg.frames = 60 * 10;
+    return environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &msg);
+}
+
 } // namespace Libretro
 
 void retro_set_environment(retro_environment_t cb)

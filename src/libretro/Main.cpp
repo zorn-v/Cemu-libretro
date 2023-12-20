@@ -10,10 +10,12 @@
 #include <windows.h>
 #endif
 
-#include "Environment.h"
-
 #include "Common/precompiled.h"
 #include "config/ActiveSettings.h"
+
+#include "Environment.h"
+#include "CemuLibretro.h"
+
 
 #define VIDEO_WIDTH 256
 #define VIDEO_HEIGHT 384
@@ -21,38 +23,18 @@
 
 std::atomic_bool g_isGPUInitFinished = false;
 
-static uint8_t *frame_buf;
 static bool use_audio_cb;
 static float last_aspect;
 static float last_sample_rate;
-char retro_base_directory[4096];
-char retro_game_path[4096];
-
-static void fallback_log(enum retro_log_level level, const char *fmt, ...)
-{
-   (void)level;
-   va_list va;
-   va_start(va, fmt);
-   vfprintf(stderr, fmt, va);
-   va_end(va);
-}
 
 
 void retro_init(void)
 {
    Libretro::LogStart();
-   frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * sizeof(uint32_t));
-   const char *dir = NULL;
-   if (Libretro::EnvCb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
-   {
-      snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
-   }
 }
 
 void retro_deinit(void)
 {
-   free(frame_buf);
-   frame_buf = NULL;
    Libretro::LogStop();
 }
 
@@ -72,7 +54,7 @@ void retro_get_system_info(struct retro_system_info *info)
    info->library_name     = EMULATOR_NAME;
    info->library_version  = BUILD_VERSION_STRING;
    info->need_fullpath    = true;
-   info->valid_extensions = "";
+   info->valid_extensions = "wud|wux|wua|iso|rpx|elf";
 }
 
 static retro_video_refresh_t video_cb;
@@ -160,8 +142,6 @@ void retro_run(void)
 {
    update_input();
 
-
-
    bool updated = false;
    if (Libretro::EnvCb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
       check_variables();
@@ -186,7 +166,6 @@ bool retro_load_game(const struct retro_game_info *info)
       return false;
    }
 
-   snprintf(retro_game_path, sizeof(retro_game_path), "%s", info->path);
    struct retro_audio_callback audio_cb = { audio_callback, audio_set_state };
    use_audio_cb = Libretro::EnvCb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
@@ -197,8 +176,7 @@ bool retro_load_game(const struct retro_game_info *info)
    ActiveSettings::LoadOnce("", system_dir, save_dir + "/config", save_dir + "/cache", system_dir);
    GetConfig().mlc_path = save_dir + "/mlc01";
 
-   (void)info;
-   return true;
+   return Libretro::Cemu::GameLoad(info->path);
 }
 
 void retro_unload_game(void)
