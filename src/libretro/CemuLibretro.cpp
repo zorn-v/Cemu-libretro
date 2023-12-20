@@ -1,6 +1,7 @@
 #include "Common/precompiled.h"
 #include "CemuLibretro.h"
 #include "Environment.h"
+#include "Cafe/CafeSystem.h"
 #include "Cafe/TitleList/TitleList.h"
 #include "util/crypto/aes128.h"
 
@@ -77,7 +78,15 @@ bool GameLoad(const fs::path launchPath)
 			return false;
 		}
 	}
+
+    CafeSystem::LaunchForegroundTitle();
+
     return true;
+}
+
+void GameUnload()
+{
+    CafeSystem::Shutdown();
 }
 
 } // namespace Cemu

@@ -23,7 +23,7 @@ void cemuLog_writeLineToLog(std::string_view text, bool date, bool new_line)
 	if (new_line)
 		result += "\n";
 
-    Libretro::Log("%s", result.c_str());
+    Libretro::Log(result.c_str());
 }
 
 bool cemuLog_log(LogType type, std::string_view text)
