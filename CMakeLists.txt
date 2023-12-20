@@ -1,5 +1,21 @@
 cmake_minimum_required(VERSION 3.21.1)
 
+option(LIBRETRO "Build as a libretro library" OFF)
+
+if(LIBRETRO)
+  set(PORTABLE 0)
+  set(ENABLE_WAYLAND 0)
+  set(ENABLE_FERAL_GAMEMODE 0)
+  set(ENABLE_DISCORD_RPC 0)
+  set(ENABLE_HIDAPI 0)
+  set(ENABLE_SDL 0)
+  set(ENABLE_NSYSHID_LIBUSB 0)
+  #set(ENABLE_CUBEB 0)
+  #set(ENABLE_WXWIDGETS 0)
+  add_definitions(-D__LIBRETRO__)
+  add_compile_options("-fpic")
+endif()
+
 option(ENABLE_VCPKG "Enable the vcpkg package manager" ON)
 option(PORTABLE "All data created and maintained by Cemu will be in the directory where the executable file is located" ON)
 option(MACOS_BUNDLE "The executable when built on macOS will be created as an application bundle" OFF)

@@ -56,6 +56,10 @@ add_executable(CemuBin
 	mainLLE.cpp
 )
 
+if(LIBRETRO)
+	add_subdirectory(libretro)
+endif()
+
 if(WIN32)
 	target_sources(CemuBin PRIVATE
 	resource/cemu.rc
