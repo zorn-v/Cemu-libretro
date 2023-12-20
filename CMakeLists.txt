@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21.1)
 
-option(LIBRETRO "Build as a libretro library" OFF)
+option(LIBRETRO "Build as a libretro library" ON)
 
 if(LIBRETRO)
   set(PORTABLE 0)
