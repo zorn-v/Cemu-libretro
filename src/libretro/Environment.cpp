@@ -45,6 +45,27 @@ void Log(const char *fmt, ...)
     va_end(va);
 }
 
+std::string GetEnvStr(unsigned cmd)
+{
+    char* var = nullptr;
+    if (!environ_cb(cmd, &var) || var == nullptr) {
+        // Fetching variable failed.
+        Log("Fetching %u libretro env var failed\n", cmd);
+        return std::string();
+    }
+    return std::string(var);
+}
+
+std::string GetSaveDir()
+{
+    return GetEnvStr(RETRO_ENVIRONMENT_GET_SAVE_DIRECTORY);
+}
+
+std::string GetSystemDir()
+{
+    return GetEnvStr(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY);
+}
+
 } // namespace Libretro
 
 void retro_set_environment(retro_environment_t cb)

@@ -22,6 +22,5 @@ endif()
 
 include_directories(..)
 
-#target_sources(CemuComponents PUBLIC Logging.cpp)
-target_link_libraries(CemuComponents PRIVATE cemu_libretro)
-target_link_libraries(cemu_libretro PRIVATE Boost::headers)
+target_link_libraries(cemu_libretro PRIVATE CemuConfig)
+target_link_libraries(cemu_libretro PRIVATE Boost::headers wx::base)

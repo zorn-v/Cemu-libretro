@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "libretro.h"
 
 namespace Libretro {
@@ -10,5 +11,8 @@ void LogStart();
 bool LogEnabled();
 void LogStop();
 void Log(const char *fmt, ...);
+
+std::string GetSaveDir();
+std::string GetSystemDir();
 
 } // namespace Libretro

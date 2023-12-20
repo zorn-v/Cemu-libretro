@@ -12,11 +12,14 @@
 
 #include "Environment.h"
 
-#include "Common/version.h"
+#include "Common/precompiled.h"
+#include "config/ActiveSettings.h"
 
 #define VIDEO_WIDTH 256
 #define VIDEO_HEIGHT 384
 #define VIDEO_PIXELS VIDEO_WIDTH * VIDEO_HEIGHT
+
+std::atomic_bool g_isGPUInitFinished = false;
 
 static uint8_t *frame_buf;
 static bool use_audio_cb;
@@ -188,6 +191,11 @@ bool retro_load_game(const struct retro_game_info *info)
    use_audio_cb = Libretro::EnvCb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
    check_variables();
+
+   std::string save_dir = Libretro::GetSaveDir() + "/Cemu";
+   std::string system_dir = Libretro::GetSystemDir() + "/Cemu";
+   ActiveSettings::LoadOnce("", system_dir, save_dir + "/config", save_dir + "/cache", system_dir);
+   GetConfig().mlc_path = save_dir + "/mlc01";
 
    (void)info;
    return true;
