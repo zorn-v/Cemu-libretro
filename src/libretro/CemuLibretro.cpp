@@ -3,10 +3,14 @@
 #include "Environment.h"
 #include "Cafe/CafeSystem.h"
 #include "Cafe/TitleList/TitleList.h"
+// #include "Cafe/HW/Latte/Core/LatteOverlay.h"
+#include "Cafe/HW/Latte/Renderer/OpenGL/OpenGLRenderer.h"
 #include "util/crypto/aes128.h"
 
 namespace Libretro::Cemu
 {
+	class OGLRenderer : public OpenGLRenderer {};
+
 	// check MainWindow::FileLoad
 	bool GameLoad(const fs::path launchPath)
 	{
@@ -82,6 +86,8 @@ namespace Libretro::Cemu
 
 	void LaunchTitle()
 	{
+		// LatteOverlay_init();
+		g_renderer = std::make_unique<OGLRenderer>();
 		CafeSystem::LaunchForegroundTitle();
 	}
 

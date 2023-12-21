@@ -1,5 +1,6 @@
 add_library(cemu_libretro SHARED
     CemuLibretro.cpp
+    CemuLibretro.h
     Environment.cpp
     Environment.h
     Logging.cpp
