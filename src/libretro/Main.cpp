@@ -139,6 +139,15 @@ void retro_run(void)
 		check_variables();
 }
 
+static struct retro_hw_render_callback s_hwRender;
+
+void context_reset()
+{
+	Libretro::Cemu::LaunchTitle();
+}
+
+void context_destroy() {}
+
 bool retro_load_game(const struct retro_game_info* info)
 {
 	struct retro_input_descriptor desc[] = {
@@ -154,7 +163,7 @@ bool retro_load_game(const struct retro_game_info* info)
 	enum retro_pixel_format fmt = RETRO_PIXEL_FORMAT_XRGB8888;
 	if (!Libretro::EnvCb(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &fmt))
 	{
-		// log_cb(RETRO_LOG_INFO, "XRGB8888 is not supported.\n");
+		Libretro::Log("XRGB8888 is not supported.\n");
 		return false;
 	}
 
@@ -162,6 +171,19 @@ bool retro_load_game(const struct retro_game_info* info)
 	use_audio_cb = Libretro::EnvCb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
 	check_variables();
+
+	s_hwRender.context_type = RETRO_HW_CONTEXT_OPENGL_CORE;
+	s_hwRender.version_major = 3;
+	s_hwRender.version_minor = 3;
+	s_hwRender.context_reset = context_reset;
+	s_hwRender.context_destroy = context_destroy;
+	s_hwRender.cache_context = false;
+	s_hwRender.bottom_left_origin = true;
+	if (!Libretro::EnvCb(RETRO_ENVIRONMENT_SET_HW_RENDER, &s_hwRender))
+	{
+		Libretro::DisplayMessage("Failed to set HW render");
+		return false;
+	}
 
 	std::string save_dir = Libretro::GetSaveDir() + "/Cemu";
 	std::string system_dir = Libretro::GetSystemDir() + "/Cemu";

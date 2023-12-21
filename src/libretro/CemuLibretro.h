@@ -1,10 +1,8 @@
 #pragma once
 
-namespace Libretro
+namespace Libretro::Cemu
 {
-	namespace Cemu
-	{
-		bool GameLoad(const fs::path launchPath);
-		void GameUnload();
-	} // namespace Cemu
-} // namespace Libretro
+	bool GameLoad(const fs::path launchPath);
+	void LaunchTitle();
+	void GameUnload();
+} // namespace Libretro::Cemu
