@@ -17,3 +17,5 @@ namespace Libretro
 
 	bool DisplayMessage(const char* sg);
 } // namespace Libretro
+
+#define dbgLog(fmt, ...) fprintf(stderr, fmt "\n", __VA_ARGS__)

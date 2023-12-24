@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21.1)
 
 option(LIBRETRO "Build as a libretro library" ON)
 
-if(LIBRETRO)
+if (LIBRETRO)
   set(PORTABLE 0)
   set(ENABLE_WAYLAND 0)
   set(ENABLE_FERAL_GAMEMODE 0)
@@ -13,7 +13,8 @@ if(LIBRETRO)
   #set(ENABLE_CUBEB 0)
   #set(ENABLE_WXWIDGETS 0)
   add_definitions(-D__LIBRETRO__)
-  add_compile_options("-fpic")
+  add_compile_options("-fPIC")
+  #add_link_options("")
 endif()
 
 option(ENABLE_VCPKG "Enable the vcpkg package manager" ON)

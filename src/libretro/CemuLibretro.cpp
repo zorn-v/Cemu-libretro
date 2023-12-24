@@ -1,4 +1,12 @@
 #include "Common/precompiled.h"
+
+// #include "Common/GLInclude/GLInclude.h"
+// #define GLFUNC(__type, __name)	extern __type __name = nullptr;
+// #define EGLFUNC(__type, __name)	extern __type __name = nullptr;
+// #include "Common/GLInclude/glFunctions.h"
+// #undef GLFUNC
+// #undef EGLFUNC
+
 #include "CemuLibretro.h"
 #include "Environment.h"
 #include "Cafe/CafeSystem.h"
@@ -86,6 +94,18 @@ namespace Libretro::Cemu
 
 	void LaunchTitle()
 	{
+		dbgLog("glDrawBuffer = %p", &glDrawBuffer);
+		FILE *fp = fopen("/proc/self/maps", "r");
+		int BUFFER_SIZE = 256;
+		char buffer[BUFFER_SIZE];
+		if (fp != NULL)
+		{
+			while (fgets(buffer, BUFFER_SIZE, fp) != NULL)
+				fprintf(stderr, "%s", buffer);
+			pclose(fp);
+		}
+		glDrawBuffer = nullptr; // <= segfault
+		dbgLog("glDrawBuffer = %p", glDrawBuffer); 
 		// LatteOverlay_init();
 		g_renderer = std::make_unique<OGLRenderer>();
 		CafeSystem::LaunchForegroundTitle();
