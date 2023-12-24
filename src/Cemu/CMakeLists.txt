@@ -32,7 +32,7 @@ add_library(CemuComponents
 )
 
 if (NOT LIBRETRO)
-  target_sources(CemuComponents PUBLIC Logging/CemuLogging.cpp)
+  target_sources(CemuComponents PRIVATE Logging/CemuLogging.cpp)
 endif()
 
 set_property(TARGET CemuComponents PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -54,7 +54,7 @@ target_link_libraries(CemuComponents PRIVATE
 )
 
 # PUBLIC because fmt/format.h is included in ExpressionParser/ExpressionParser.h
-target_link_libraries(CemuComponents PUBLIC fmt::fmt wx:base wx:core)
+target_link_libraries(CemuComponents PUBLIC fmt::fmt)
 
 if(ENABLE_DISCORD_RPC)
 	target_link_libraries(CemuComponents PRIVATE discord-rpc)
