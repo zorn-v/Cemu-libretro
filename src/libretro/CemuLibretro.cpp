@@ -10,11 +10,12 @@
 
 void LoadOpenGLImports()
 {
+	dbgLog("get_current_framebuffer = %u", Libretro::hw_render.get_current_framebuffer());
 	dbgLog("glDrawBuffer = %p", Libretro::hw_render.get_proc_address("glDrawBuffer"));
 	PFNGLGETSTRINGPROC l_glGetString = (PFNGLGETSTRINGPROC)Libretro::hw_render.get_proc_address("glGetString");
 	dbgLog("glGetString(GL_VENDOR) = %s", l_glGetString(GL_VENDOR));
 	glGetString = (PFNGLGETSTRINGPROC)Libretro::hw_render.get_proc_address("glGetString"); // <= segfault
-	dbgLog("NO SEGFAULT happens !!!");
+	dbgLog("NO SEGFAULT happened !!!");
 #define GLFUNC(__type, __name)	__name = (__type)Libretro::hw_render.get_proc_address(#__name);
 #define EGLFUNC(__type, __name) __name = (__type)Libretro::hw_render.get_proc_address(#__name);
 #include "Common/GLInclude/glFunctions.h"

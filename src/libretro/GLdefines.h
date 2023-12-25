@@ -1,0 +1,299 @@
+// OpenGL 1.1 - 2.0
+#define glDrawBuffer LRLDR_glDrawBuffer
+#define glGenTextures LRLDR_glGenTextures
+#define glDeleteTextures LRLDR_glDeleteTextures
+#define glBindTexture LRLDR_glBindTexture
+#define glTexParameteri LRLDR_glTexParameteri
+#define glTexImage2D LRLDR_glTexImage2D
+#define glTexSubImage2D LRLDR_glTexSubImage2D
+#define glTexImage1D LRLDR_glTexImage1D
+#define glTexSubImage1D LRLDR_glTexSubImage1D
+#define glGetTexImage LRLDR_glGetTexImage
+#define glEnable LRLDR_glEnable
+#define glDisable LRLDR_glDisable
+#define glIsEnabled LRLDR_glIsEnabled
+#define glClear LRLDR_glClear
+#define glClearColor LRLDR_glClearColor
+#define glClearDepth LRLDR_glClearDepth
+#define glClearStencil LRLDR_glClearStencil
+#define glFlush LRLDR_glFlush
+#define glFinish LRLDR_glFinish
+#define glPixelStorei LRLDR_glPixelStorei
+#define glGetString LRLDR_glGetString
+#define glGetIntegerv LRLDR_glGetIntegerv
+#define glGetTexLevelParameteriv LRLDR_glGetTexLevelParameteriv
+#define glTexParameterf LRLDR_glTexParameterf
+#define glTexParameterfv LRLDR_glTexParameterfv
+#define glDepthFunc LRLDR_glDepthFunc
+#define glDepthMask LRLDR_glDepthMask
+#define glDepthRange LRLDR_glDepthRange
+#define glFrontFace LRLDR_glFrontFace
+#define glCullFace LRLDR_glCullFace
+#define glPolygonOffset LRLDR_glPolygonOffset
+#define glPointSize LRLDR_glPointSize
+#define glLogicOp LRLDR_glLogicOp
+#define glPolygonMode LRLDR_glPolygonMode
+#define glScissor LRLDR_glScissor
+#define glViewport LRLDR_glViewport
+#define glGetError LRLDR_glGetError
+#define glDrawArrays LRLDR_glDrawArrays
+
+// everything else
+
+#define glUniform1i LRLDR_glUniform1i
+#define glUniform2i LRLDR_glUniform2i
+#define glUniform2f LRLDR_glUniform2f
+#define glUniform4fv LRLDR_glUniform4fv
+#define glUniformMatrix4fv LRLDR_glUniformMatrix4fv
+
+
+#define glGetShaderInfoLog LRLDR_glGetShaderInfoLog
+
+#define glUseProgram LRLDR_glUseProgram
+
+#define glGetUniformLocation LRLDR_glGetUniformLocation
+
+#define glActiveTexture LRLDR_glActiveTexture
+#define glClientActiveTexture LRLDR_glClientActiveTexture
+
+#define glPrimitiveRestartIndex LRLDR_glPrimitiveRestartIndex
+
+#define glDrawRangeElements LRLDR_glDrawRangeElements
+#define glDrawRangeElementsBaseVertex LRLDR_glDrawRangeElementsBaseVertex
+
+#define glGenBuffers LRLDR_glGenBuffers
+#define glBindBuffer LRLDR_glBindBuffer
+#define glBufferData LRLDR_glBufferData
+#define glBufferSubData LRLDR_glBufferSubData
+#define glMapBuffer LRLDR_glMapBuffer
+#define glUnmapBuffer LRLDR_glUnmapBuffer
+#define glDeleteBuffers LRLDR_glDeleteBuffers
+
+#define glEnableVertexAttribArray LRLDR_glEnableVertexAttribArray
+#define glDisableVertexAttribArray LRLDR_glDisableVertexAttribArray
+#define glGetAttribLocation LRLDR_glGetAttribLocation
+#define glBindAttribLocation LRLDR_glBindAttribLocation
+#define glVertexAttribPointer LRLDR_glVertexAttribPointer
+#define glVertexAttribIPointer LRLDR_glVertexAttribIPointer
+
+#define glBlendEquation LRLDR_glBlendEquation
+#define glBlendFuncSeparate LRLDR_glBlendFuncSeparate
+#define glBlendEquationSeparate LRLDR_glBlendEquationSeparate
+#define glBlendEquationSeparatei LRLDR_glBlendEquationSeparatei
+#define glBlendFuncSeparatei LRLDR_glBlendFuncSeparatei
+#define glBlendColor LRLDR_glBlendColor
+
+#define glDrawBuffers LRLDR_glDrawBuffers
+#define glClampColor LRLDR_glClampColor
+
+#define glBindFragDataLocation LRLDR_glBindFragDataLocation
+
+#define glShaderSource LRLDR_glShaderSource
+#define glCompileShader LRLDR_glCompileShader
+#define glAttachShader LRLDR_glAttachShader
+#define glLinkProgram LRLDR_glLinkProgram
+#define glGetShaderiv LRLDR_glGetShaderiv
+#define glGetProgramiv LRLDR_glGetProgramiv
+#define glGetProgramInfoLog LRLDR_glGetProgramInfoLog
+#define glGetProgramBinary LRLDR_glGetProgramBinary
+#define glProgramBinary LRLDR_glProgramBinary
+#define glProgramParameteri LRLDR_glProgramParameteri
+#define glCreateProgram LRLDR_glCreateProgram
+#define glCreateShader LRLDR_glCreateShader
+#define glDeleteProgram LRLDR_glDeleteProgram
+#define glDeleteShader LRLDR_glDeleteShader
+#define glDetachShader LRLDR_glDetachShader
+#define glGetAttachedShaders LRLDR_glGetAttachedShaders
+
+#define glCreateShaderProgramv LRLDR_glCreateShaderProgramv
+#define glUseProgramStages LRLDR_glUseProgramStages
+#define glBindProgramPipeline LRLDR_glBindProgramPipeline
+#define glGenProgramPipelines LRLDR_glGenProgramPipelines
+#define glActiveShaderProgram LRLDR_glActiveShaderProgram
+#define glDeleteProgramPipelines LRLDR_glDeleteProgramPipelines
+
+#define glProgramUniform1i LRLDR_glProgramUniform1i
+#define glProgramUniform2i LRLDR_glProgramUniform2i
+#define glProgramUniform1iv LRLDR_glProgramUniform1iv
+#define glProgramUniform4iv LRLDR_glProgramUniform4iv
+#define glProgramUniform1fv LRLDR_glProgramUniform1fv
+#define glProgramUniform2fv LRLDR_glProgramUniform2fv
+
+// FBO
+
+#define glGenFramebuffers LRLDR_glGenFramebuffers
+#define glBindFramebuffer LRLDR_glBindFramebuffer
+#define glFramebufferTexture2D LRLDR_glFramebufferTexture2D
+#define glFramebufferTextureLayer LRLDR_glFramebufferTextureLayer
+#define glNamedFramebufferTexture LRLDR_glNamedFramebufferTexture
+#define glCheckFramebufferStatus LRLDR_glCheckFramebufferStatus
+#define glInvalidateFramebuffer LRLDR_glInvalidateFramebuffer
+#define glDeleteFramebuffers LRLDR_glDeleteFramebuffers
+
+#define glNamedFramebufferTexture LRLDR_glNamedFramebufferTexture
+#define glNamedFramebufferTexture2DEXT LRLDR_glNamedFramebufferTexture2DEXT
+#define glNamedFramebufferTextureLayer LRLDR_glNamedFramebufferTextureLayer
+
+#define glEnablei LRLDR_glEnablei
+#define glDisablei LRLDR_glDisablei
+
+#define glBeginQueryIndexed LRLDR_glBeginQueryIndexed
+#define glEndQueryIndexed LRLDR_glEndQueryIndexed
+#define glGetQueryIndexediv LRLDR_glGetQueryIndexediv
+#define glGetQueryObjecti64v LRLDR_glGetQueryObjecti64v
+
+#define glGenQueries LRLDR_glGenQueries
+#define glDeleteQueries LRLDR_glDeleteQueries
+#define glQueryCounter LRLDR_glQueryCounter
+#define glGetQueryObjectiv LRLDR_glGetQueryObjectiv
+
+// FBO DSA
+
+#define glCreateFramebuffers LRLDR_glCreateFramebuffers
+#define glInvalidateNamedFramebufferData LRLDR_glInvalidateNamedFramebufferData
+
+
+// misc
+
+#define glColorMaski LRLDR_glColorMaski
+#define glTextureBarrier LRLDR_glTextureBarrier
+#define glClipControl LRLDR_glClipControl
+#define glViewportIndexedf LRLDR_glViewportIndexedf
+#define glMaxShaderCompilerThreadsARB LRLDR_glMaxShaderCompilerThreadsARB
+#define glDepthRangedNV LRLDR_glDepthRangedNV
+#define glPolygonOffsetClampEXT LRLDR_glPolygonOffsetClampEXT
+
+// texture 
+
+#define glTextureView LRLDR_glTextureView
+#define glTexStorage1D LRLDR_glTexStorage1D
+#define glTexStorage2D LRLDR_glTexStorage2D
+#define glTexStorage3D LRLDR_glTexStorage3D
+#define glTexImage3D LRLDR_glTexImage3D
+#define glTexSubImage3D LRLDR_glTexSubImage3D
+#define glCompressedTexImage1D LRLDR_glCompressedTexImage1D
+#define glCompressedTexImage2D LRLDR_glCompressedTexImage2D
+#define glCompressedTexImage3D LRLDR_glCompressedTexImage3D
+#define glCompressedTexSubImage1D LRLDR_glCompressedTexSubImage1D
+#define glCompressedTexSubImage2D LRLDR_glCompressedTexSubImage2D
+#define glCompressedTexSubImage3D LRLDR_glCompressedTexSubImage3D
+#define glCompressedTextureSubImage1D LRLDR_glCompressedTextureSubImage1D
+#define glCompressedTextureSubImage2D LRLDR_glCompressedTextureSubImage2D
+#define glCompressedTextureSubImage3D LRLDR_glCompressedTextureSubImage3D
+#define glCopyImageSubData LRLDR_glCopyImageSubData
+#define glClearTexImage LRLDR_glClearTexImage
+#define glClearTexSubImage LRLDR_glClearTexSubImage
+#define glInvalidateTexImage LRLDR_glInvalidateTexImage
+
+// texture DSA
+
+#define glCreateTextures LRLDR_glCreateTextures
+#define glBindTextureUnit LRLDR_glBindTextureUnit
+#define glGetTextureLevelParameteriv LRLDR_glGetTextureLevelParameteriv
+#define glTextureParameteri LRLDR_glTextureParameteri
+#define glGetTextureSubImage LRLDR_glGetTextureSubImage
+#define glTextureSubImage1D LRLDR_glTextureSubImage1D
+#define glTextureSubImage2D LRLDR_glTextureSubImage2D
+#define glTextureSubImage3D LRLDR_glTextureSubImage3D
+#define glTextureStorage1D LRLDR_glTextureStorage1D
+#define glTextureStorage2D LRLDR_glTextureStorage2D
+#define glTextureStorage3D LRLDR_glTextureStorage3D
+
+// instancing / draw
+
+#define glDrawElementsBaseVertex LRLDR_glDrawElementsBaseVertex
+#define glDrawElementsInstancedBaseVertexBaseInstance LRLDR_glDrawElementsInstancedBaseVertexBaseInstance
+#define glDrawArraysInstanced LRLDR_glDrawArraysInstanced
+
+// vertex array
+
+#define glGenVertexArrays LRLDR_glGenVertexArrays
+#define glBindVertexArray LRLDR_glBindVertexArray
+#define glDeleteVertexArrays LRLDR_glDeleteVertexArrays
+#define glBindVertexBuffer LRLDR_glBindVertexBuffer
+#define glVertexAttribFormat LRLDR_glVertexAttribFormat
+#define glVertexAttribIFormat LRLDR_glVertexAttribIFormat
+#define glVertexAttribBinding LRLDR_glVertexAttribBinding
+#define glVertexBindingDivisor LRLDR_glVertexBindingDivisor
+#define glVertexAttribDivisor LRLDR_glVertexAttribDivisor
+
+// vertex array DSA
+
+#define glCreateVertexArrays LRLDR_glCreateVertexArrays
+#define glDisableVertexArrayAttrib LRLDR_glDisableVertexArrayAttrib
+#define glEnableVertexArrayAttrib LRLDR_glEnableVertexArrayAttrib
+#define glVertexArrayElementBuffer LRLDR_glVertexArrayElementBuffer
+#define glVertexArrayVertexBuffer LRLDR_glVertexArrayVertexBuffer
+#define glVertexArrayAttribBinding LRLDR_glVertexArrayAttribBinding
+#define glVertexArrayAttribIFormat LRLDR_glVertexArrayAttribIFormat
+#define glVertexArrayBindingDivisor LRLDR_glVertexArrayBindingDivisor
+
+// sampler
+
+#define glGenSamplers LRLDR_glGenSamplers
+#define glBindSampler LRLDR_glBindSampler
+#define glSamplerParameteri LRLDR_glSamplerParameteri
+#define glSamplerParameterf LRLDR_glSamplerParameterf
+#define glSamplerParameteriv LRLDR_glSamplerParameteriv
+#define glSamplerParameterfv LRLDR_glSamplerParameterfv
+
+// buffer object
+
+#define glGetUniformBlockIndex LRLDR_glGetUniformBlockIndex
+#define glUniformBlockBinding LRLDR_glUniformBlockBinding
+#define glBindBufferBase LRLDR_glBindBufferBase
+#define glBindBufferRange LRLDR_glBindBufferRange
+#define glGetBufferSubData LRLDR_glGetBufferSubData
+
+// uniform storage buffer object
+
+#define glGetProgramResourceIndex LRLDR_glGetProgramResourceIndex
+#define glShaderStorageBlockBinding LRLDR_glShaderStorageBlockBinding
+
+// stencil 
+
+#define glStencilOpSeparate LRLDR_glStencilOpSeparate
+#define glStencilFuncSeparate LRLDR_glStencilFuncSeparate
+#define glStencilMaskSeparate LRLDR_glStencilMaskSeparate
+
+// buffer
+
+#define glCreateBuffers LRLDR_glCreateBuffers
+#define glBufferStorage LRLDR_glBufferStorage
+#define glNamedBufferStorage LRLDR_glNamedBufferStorage
+#define glMapNamedBuffer LRLDR_glMapNamedBuffer
+#define glMapNamedBufferRange LRLDR_glMapNamedBufferRange
+#define glMapBufferRange LRLDR_glMapBufferRange
+#define glFlushMappedBufferRange LRLDR_glFlushMappedBufferRange
+#define glMemoryBarrier LRLDR_glMemoryBarrier
+#define glCopyBufferSubData LRLDR_glCopyBufferSubData
+#define glCopyNamedBufferSubData LRLDR_glCopyNamedBufferSubData
+#define glNamedBufferSubData LRLDR_glNamedBufferSubData
+#define glGetNamedBufferSubData LRLDR_glGetNamedBufferSubData
+
+// transform feedback
+
+#define glBeginTransformFeedback LRLDR_glBeginTransformFeedback
+#define glEndTransformFeedback LRLDR_glEndTransformFeedback
+#define glTransformFeedbackVaryings LRLDR_glTransformFeedbackVaryings
+
+// sync / fence
+
+#define glFenceSync LRLDR_glFenceSync
+#define glClientWaitSync LRLDR_glClientWaitSync
+#define glDeleteSync LRLDR_glDeleteSync
+
+// debugging
+
+#define glObjectLabel LRLDR_glObjectLabel
+#define glDebugMessageCallback LRLDR_glDebugMessageCallback
+#define glDebugMessageControl LRLDR_glDebugMessageControl
+
+// wgl
+
+#define wglSwapIntervalEXT LRLDR_wglSwapIntervalEXT
+
+// x
+
+#define eglSwapInterval LRLDR_eglSwapInterval
+#define eglGetCurrentDisplay LRLDR_eglGetCurrentDisplay

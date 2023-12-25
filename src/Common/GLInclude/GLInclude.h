@@ -36,6 +36,9 @@ typedef struct __GLXFBConfigRec *GLXFBConfig;
 
 #endif
 
+#ifdef __LIBRETRO__
+#include "libretro/GLdefines.h"
+#endif
 #define GLFUNC(__type, __name)	extern __type __name;
 #define EGLFUNC(__type, __name) extern __type __name;
 #include "glFunctions.h"
