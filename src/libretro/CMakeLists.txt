@@ -25,5 +25,4 @@ endif()
 
 include_directories(..)
 
-target_link_libraries(cemu_libretro PRIVATE CemuConfig)
-target_link_libraries(cemu_libretro PRIVATE Boost::headers wx::base)
+target_link_libraries(cemu_libretro PRIVATE CemuCommon CemuConfig)

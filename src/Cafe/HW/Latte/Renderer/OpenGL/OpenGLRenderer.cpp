@@ -189,6 +189,9 @@ void OpenGLRenderer::DeleteFontTextures()
 	ImGui_ImplOpenGL3_DestroyFontsTexture();
 }
 
+#ifdef __LIBRETRO__
+extern void LoadOpenGLImports();
+#else
 typedef void(*GL_IMPORT)();
 
 #if BOOST_OS_WINDOWS
@@ -247,6 +250,7 @@ void LoadOpenGLImports()
 	cemu_assert_unimplemented();
 }
 #endif
+#endif // __LIBRETRO__
 
 void OpenGLRenderer::Initialize()
 {

@@ -1,12 +1,5 @@
 #include "Common/precompiled.h"
 
-// #include "Common/GLInclude/GLInclude.h"
-// #define GLFUNC(__type, __name)	extern __type __name = nullptr;
-// #define EGLFUNC(__type, __name)	extern __type __name = nullptr;
-// #include "Common/GLInclude/glFunctions.h"
-// #undef GLFUNC
-// #undef EGLFUNC
-
 #include "CemuLibretro.h"
 #include "Environment.h"
 #include "Cafe/CafeSystem.h"
@@ -14,6 +7,21 @@
 // #include "Cafe/HW/Latte/Core/LatteOverlay.h"
 #include "Cafe/HW/Latte/Renderer/OpenGL/OpenGLRenderer.h"
 #include "util/crypto/aes128.h"
+
+void LoadOpenGLImports()
+{
+	dbgLog("glDrawBuffer = %p", Libretro::hw_render.get_proc_address("glDrawBuffer"));
+	PFNGLGETSTRINGPROC l_glGetString = (PFNGLGETSTRINGPROC)Libretro::hw_render.get_proc_address("glGetString");
+	dbgLog("glGetString(GL_VENDOR) = %s", l_glGetString(GL_VENDOR));
+	glGetString = (PFNGLGETSTRINGPROC)Libretro::hw_render.get_proc_address("glGetString"); // <= segfault
+	dbgLog("NO SEGFAULT happens !!!");
+#define GLFUNC(__type, __name)	__name = (__type)Libretro::hw_render.get_proc_address(#__name);
+#define EGLFUNC(__type, __name) __name = (__type)Libretro::hw_render.get_proc_address(#__name);
+#include "Common/GLInclude/glFunctions.h"
+#undef GLFUNC
+#undef EGLFUNC
+	dbgLog("LoadOpenGLImports END");
+}
 
 namespace Libretro::Cemu
 {
@@ -94,8 +102,8 @@ namespace Libretro::Cemu
 
 	void LaunchTitle()
 	{
-		dbgLog("glDrawBuffer = %p", &glDrawBuffer);
-		FILE *fp = fopen("/proc/self/maps", "r");
+		//dbgLog("glDrawBuffer = %p", &glDrawBuffer);
+		/*FILE *fp = fopen("/proc/self/maps", "r");
 		int BUFFER_SIZE = 256;
 		char buffer[BUFFER_SIZE];
 		if (fp != NULL)
@@ -103,9 +111,9 @@ namespace Libretro::Cemu
 			while (fgets(buffer, BUFFER_SIZE, fp) != NULL)
 				fprintf(stderr, "%s", buffer);
 			pclose(fp);
-		}
-		glDrawBuffer = nullptr; // <= segfault
-		dbgLog("glDrawBuffer = %p", glDrawBuffer); 
+		}*/
+		//glDrawBuffer = nullptr; // <= segfault
+		//dbgLog("glDrawBuffer = %p", glDrawBuffer); 
 		// LatteOverlay_init();
 		g_renderer = std::make_unique<OGLRenderer>();
 		CafeSystem::LaunchForegroundTitle();

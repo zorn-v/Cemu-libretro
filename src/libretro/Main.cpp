@@ -139,8 +139,6 @@ void retro_run(void)
 		check_variables();
 }
 
-static struct retro_hw_render_callback s_hwRender;
-
 void context_reset()
 {
 	Libretro::Cemu::LaunchTitle();
@@ -172,14 +170,16 @@ bool retro_load_game(const struct retro_game_info* info)
 
 	check_variables();
 
-	s_hwRender.context_type = RETRO_HW_CONTEXT_OPENGL_CORE;
-	s_hwRender.version_major = 3;
-	s_hwRender.version_minor = 3;
-	s_hwRender.context_reset = context_reset;
-	s_hwRender.context_destroy = context_destroy;
-	s_hwRender.cache_context = false;
-	s_hwRender.bottom_left_origin = true;
-	if (!Libretro::EnvCb(RETRO_ENVIRONMENT_SET_HW_RENDER, &s_hwRender))
+	Libretro::EnvCb(RETRO_ENVIRONMENT_SET_HW_SHARED_CONTEXT, NULL);
+
+	Libretro::hw_render.context_type = RETRO_HW_CONTEXT_OPENGL_CORE;
+	Libretro::hw_render.version_major = 3;
+	Libretro::hw_render.version_minor = 3;
+	Libretro::hw_render.context_reset = context_reset;
+	Libretro::hw_render.context_destroy = context_destroy;
+	Libretro::hw_render.cache_context = false;
+	Libretro::hw_render.bottom_left_origin = true;
+	if (!Libretro::EnvCb(RETRO_ENVIRONMENT_SET_HW_RENDER, &Libretro::hw_render))
 	{
 		Libretro::DisplayMessage("Failed to set HW render");
 		return false;

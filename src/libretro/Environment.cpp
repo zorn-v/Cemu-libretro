@@ -4,6 +4,7 @@
 
 namespace Libretro
 {
+	struct retro_hw_render_callback hw_render;
 	namespace
 	{
 		static retro_environment_t environ_cb;
